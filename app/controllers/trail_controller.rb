@@ -4,10 +4,11 @@ class TrailController < Sinatra::Base
 
   configure do
     set :public_folder, 'public'
-    set :views, 'app/views'
+    set :views, 'app/views/trails'
   end
 
   get '/trails' do
+    @trails = Trail.all
     erb :index
   end
 
@@ -15,12 +16,13 @@ class TrailController < Sinatra::Base
     erb :new
   end
 
-  post 'trails' do
+  post '/trails' do
+    binding.pry
     @trail = Trail.create(params)
     redirect "/trails/#{@trail.id}"
   end
 
-  get 'trails/:id' do
+  get '/trails/:id' do
     @trail = Trail.find(params[:id])
     erb :show
   end

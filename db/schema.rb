@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(version: 20190306185414) do
 
   create_table "trails", force: :cascade do |t|
+    t.string   "name"
     t.string   "length"
     t.string   "duration"
     t.string   "location"
