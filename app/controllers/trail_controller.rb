@@ -7,5 +7,9 @@ class TrailController < Sinatra::Base
     set :views, 'app/views'
   end
 
-  
+  get '/trails' do
+    erb :index
+  end
+
+
 end
