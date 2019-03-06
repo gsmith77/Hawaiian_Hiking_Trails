@@ -17,7 +17,6 @@ class TrailController < Sinatra::Base
   end
 
   post '/trails' do
-    binding.pry
     @trail = Trail.create(params)
     redirect "/trails/#{@trail.id}"
   end

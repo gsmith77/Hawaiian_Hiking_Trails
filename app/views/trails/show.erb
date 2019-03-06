@@ -1,5 +1,11 @@
-<%=@trail.name%>
+<>Trail Name:</><%=@trail.name.capitalize%>
+<br>
 <%=@trail.length%>
+<br>
 <%=@trail.duration%>
-<%=@trail.location%>
+<br>
+<%@trail.location.split(" ").map! do |word|%>
+  <%=word.capitalize%>
+<%end%>
+<br>
 <%=@trail.difficulty%>
