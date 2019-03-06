@@ -1,0 +1,16 @@
+<h1>Update the <%=@trail.name.capitalize%> Trail</h1>
+
+<form action="/trails/<%=@trail.id%>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <label for="name">Trail Name:</label>
+  <input type="text" value="name" name="name">
+  <label for="length">Trail Length:</label>
+  <input type="text" value="length" name="length">
+  <label for="duration">Trail Duration:</label>
+  <input type="text" value="duration" name="duration">
+  <label for="location">Trail Location:</label>
+  <input type="text" value="location" name="location">
+  <label for="difficulty">Trail Difficulty:</label>
+  <input type="text" value="difficulty" name="difficulty">
+  <input type="submit" value="submit">
+</form>
