@@ -26,12 +26,12 @@ class TrailController < Sinatra::Base
     erb :show
   end
 
-  get '/trails/:id/edit' do
+  get '/trails/:id/edit' do #edit
     @trail = Trail.find_by_id(params[:id])
     erb :edit
   end
 
-  patch '/trails/:id' do
+  patch '/trails/:id' do #update
     @trail = Trail.find_by_id(params[:id])
     @trail.name = params[:name]
     @trail.length = params[:length]
@@ -40,6 +40,11 @@ class TrailController < Sinatra::Base
     @trail.difficulty = params[:difficulty]
     @trail.save
     redirect "/trails/#{@trail.id}"
+  end
+
+  delete '/trails/:id/delete' do #delete
+    @trail = Trail.delete(params[:id])
+    redirect '/trails'
   end
 
 end
