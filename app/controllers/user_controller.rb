@@ -32,7 +32,6 @@ class UserController < Sinatra::Base
   end
 
   get '/account' do
-    #binding.pry
     @user = User.find_by_id(session[:user_id])
     @trails = Trail.all
     if @user
@@ -45,15 +44,16 @@ class UserController < Sinatra::Base
 
   post '/account/details' do
     @user = User.find_by(session[:user_id])
-    binding.pry
-    if !params.empty?
+    if !params[:user][:trail].values.include?("")
        @user.trails << Trail.create(name: params[:user][:trail][:name], length: params[:user][:trail][:length],
       duration: params[:user][:trail][:duration], location: params[:user][:trail][:location],
       difficulty: params[:user][:trail][:difficulty], user_id: @user.id)
     end
-    @trails = Trail.all
+    @trails = @user.trails
     erb :show
   end
+
+  #test to see if any of the fields are empty and if they are empty then just make it go to account/details to show all of the exisiting trails
 
   get '/logout' do
     session.clear
