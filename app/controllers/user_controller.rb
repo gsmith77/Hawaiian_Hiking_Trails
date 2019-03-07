@@ -20,6 +20,7 @@ class UserController < Sinatra::Base
   post '/login' do
     @new_user = User.create(email: params[:user][:email], password_digest: params[:user][:password_digest])
     @user = User.find_by(:email => params[:user][:email])
+    @trail = Trail.all
     if @user != nil && @user.password_digest == params[:user][:password_digest]
       session[:user_id] = @user.id
       redirect to '/account'
@@ -28,7 +29,9 @@ class UserController < Sinatra::Base
   end
 
   get '/account' do
+    #binding.pry
     @user = User.find_by_id(session[:user_id])
+    @trails = Trail.all
     if @user
       @user
       erb :account
@@ -39,9 +42,12 @@ class UserController < Sinatra::Base
 
   post '/account/details' do
     @user = User.find_by(session[:user_id])
-    @trail = Trail.create(name: params[:trail][:name], length: params[:trail][:length],
+    #binding.pry
+    if params.empty? == false
+      @trail = Trail.create(name: params[:trail][:name], length: params[:trail][:length],
       duration: params[:trail][:duration], location: params[:trail][:location],
       difficulty: params[:trail][:difficulty], user_id: @user.id)
+    end
     @trails = Trail.all
     erb :show
   end

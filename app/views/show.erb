@@ -1,8 +1,22 @@
-<h1><%=@user.email%></h1>
+<h1>Welcome Back <%=@user.email%></h1>
 <%@trails.each do |trail|%>
+  <body>
+    Trail #<%=trail.id%>
+  </body>
+<br>
+<br>
   <%=trail.name%>
+  <br>
   <%=trail.length%>
+  <br>
   <%=trail.duration%>
+  <br>
   <%=trail.location%>
+  <br>
   <%=trail.difficulty%>
+  <br>
+  <br>
 <%end%>
+  <br>
+  <br>
+<a href="/logout">Log Out</a>
