@@ -38,6 +38,12 @@ class UserController < Sinatra::Base
   end
 
   post '/account/details' do
+    @user = User.find_by(session[:user_id])
+    @trail = Trail.create(name: params[:trail][:name], length: params[:trail][:length],
+      duration: params[:trail][:duration], location: params[:trail][:location],
+      difficulty: params[:trail][:difficulty], user_id: @user.id)
+    @trails = Trail.all
+    erb :show
   end
 
   get '/logout' do
