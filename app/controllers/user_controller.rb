@@ -18,8 +18,11 @@ class UserController < Sinatra::Base
   end
 
   post '/login' do
-    @new_user = User.create(email: params[:user][:email], password_digest: params[:user][:password_digest])
-    @user = User.find_by(:email => params[:user][:email])
+    if User.find_by(:email => params[:user][:email])
+      @user = User.find_by(:email => params[:user][:email])
+    else
+      @new_user = User.create(email: params[:user][:email], password_digest: params[:user][:password_digest])
+    end
     @trail = Trail.all
     if @user != nil && @user.password_digest == params[:user][:password_digest]
       session[:user_id] = @user.id
@@ -42,11 +45,11 @@ class UserController < Sinatra::Base
 
   post '/account/details' do
     @user = User.find_by(session[:user_id])
-    #binding.pry
-    if params.empty? == false
-      @trail = Trail.create(name: params[:trail][:name], length: params[:trail][:length],
-      duration: params[:trail][:duration], location: params[:trail][:location],
-      difficulty: params[:trail][:difficulty], user_id: @user.id)
+    binding.pry
+    if !params.empty?
+       @user.trails << Trail.create(name: params[:user][:trail][:name], length: params[:user][:trail][:length],
+      duration: params[:user][:trail][:duration], location: params[:user][:trail][:location],
+      difficulty: params[:user][:trail][:difficulty], user_id: @user.id)
     end
     @trails = Trail.all
     erb :show

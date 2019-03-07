@@ -14,16 +14,16 @@
       <form action="/account/details" method="post">
       <label>create a new trail:</label>
       <br>
-      <label>Trail name:</label>
-      <input  type="text" id="trail[name]" name="trail[name]"></input>
-      <label>Trail length:</label>
-      <input  type="text" id="trail[length]" name="trail[length]"></input>
-      <label>Trail duration:</label>
-      <input  type="text" id="trail[duration]" name="trail[duration]"></input>
-      <label>Trail location:</label>
-      <input  type="text" id="trail[location]" name="trail[location]"></input>
-      <label>Trail difficulty:</label>
-      <input  type="text" id="trail[difficulty]" name="trail[difficulty]"></input>
+      <label for=trail[name]>Trail name:</label>
+      <input  type="text" id="user[trail][name]" name="user[trail][name]"></input>
+      <label for="trail[length">Trail length:</label>
+      <input  type="text" id="user[trail][length]" name="user[trail][length]"></input>
+      <label for="trail[duration]">Trail duration:</label>
+      <input  type="text" id="user[trail][duration]" name="user[trail][duration]"></input>
+      <label for="trail[location]">Trail location:</label>
+      <input  type="text" id="user[trail][location]" name="user[trail][location]"></input>
+      <label for="trail[difficulty]">Trail difficulty:</label>
+      <input  type="text" id="user[trail][difficulty]" name="user[trail][difficulty]"></input>
       <input type="submit" value="Create Trail">
       </form>
     <%end%>
