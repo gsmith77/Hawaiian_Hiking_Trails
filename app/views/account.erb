@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <link rel="stylesheet" href="stylesheets/bootstrap.css" type="text/css">
+
+
+    <!-- #is not displaying page there must be an error with loading the page. Ask for help. -->
+  </head>
+  <body id="page-top">
+    <%if Helpers.is_logged_in?(session)%>
+      <h1>Welcome <%=@user.username%></h1>
+    <%end%>
+
+    <% if !Helpers.is_logged_in?(session)%>
+      <h4>You Must <a href="/">Log In</a> to View Your Account</h4>
+    <%end%>
+
+  </body>
+  <a href="/account/logout">Log Out</a>
+</html>

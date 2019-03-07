@@ -13,42 +13,31 @@ class UserController < Sinatra::Base
     set :views, 'app/views'
   end
 
-  get '/registrations/signup' do
-    erb :signup
-  end
-
-  post '/registrations' do
-    @user = User.create(email: params[:email], password: params[:password])
-    session[:id] = user.id
-
-    redirect '/users/home'
-  end
-
   get '/' do
-    erb :home
+    erb :'/registrations/signup'
   end
 
-  get '/sessions/login' do
-    erb :'/sessions/login'
-  end
-
-  post '/sessions' do
-    @user = User.find_by(email: params[:email], password: params[:password])
-    if @user
-      session[:id] = @user.id
-      redirect '/users/home'
+  post '/login' do
+    @user = User.find_by(:username => params[:username])
+    if @user != nil && @user.password == params[:password]
+      session[:user_id] = @user.id
+      redirect to '/account'
     end
-    redirect '/sessions/login'
+    erb :error
   end
 
-  get '/sessions/logout' do
+  get '/account' do
+    @user = User.find_by_id(session[:user_id])
+    if @user
+      erb :account
+    else
+      erb :error
+    end
+  end
+
+  get '/logout' do
     session.clear
-    redirect '/users'
-  end
-
-  get '/users/home' do
-    @user = User.find(session[:user_id])
-    erb :'/users/home'
+    redirect '/'
   end
 
 
