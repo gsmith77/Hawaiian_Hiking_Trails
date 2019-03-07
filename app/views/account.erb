@@ -10,7 +10,22 @@
   </head>
   <body id="page-top">
     <%if Helpers.is_logged_in?(session)%>
-      <h1>Welcome <%=@user.username%></h1>
+      <h1>Welcome <%=@user.email%></h1>
+      <form action="/account/details" method="post">
+      <label>create a new trail:</label>
+      <br>
+      <label>Trail name:</label>
+      <input  type="text" id="trail[name]" name="trail[name]"></input>
+      <label>Trail length:</label>
+      <input  type="text" id="trail[length]" name="trail[length]"></input>
+      <label>Trail duration:</label>
+      <input  type="text" id="trail[duration]" name="trail[duration]"></input>
+      <label>Trail location:</label>
+      <input  type="text" id="trail[location]" name="trail[location]"></input>
+      <label>Trail difficulty:</label>
+      <input  type="text" id="trail[difficulty]" name="trail[difficulty]"></input>
+      <input type="submit" value="Create Trail">
+      </form>
     <%end%>
 
     <% if !Helpers.is_logged_in?(session)%>
@@ -18,5 +33,5 @@
     <%end%>
 
   </body>
-  <a href="/account/logout">Log Out</a>
+  <a href="/logout">Log Out</a>
 </html>

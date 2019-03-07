@@ -1,4 +1,4 @@
-class Helpers < ActiveRecord::Base
+class Helpers
 
   #This method should use the user_id from the
   #session hash to find the user in the database and return that user.

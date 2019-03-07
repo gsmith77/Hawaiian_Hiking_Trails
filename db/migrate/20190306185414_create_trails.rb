@@ -6,6 +6,7 @@ class CreateTrails < ActiveRecord::Migration
       t.string :duration
       t.string :location
       t.string :difficulty
+      t.integer :user_id
 
       t.timestamps null: false
     end

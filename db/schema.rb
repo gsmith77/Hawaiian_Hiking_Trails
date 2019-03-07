@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20190306185414) do
     t.string   "duration"
     t.string   "location"
     t.string   "difficulty"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -7,15 +7,15 @@
   </head>
   <body id="page-top">
     <h1>Welcome to Hawaiian Hiking Trails</h1>
-    <h3>Log In Please</h3>
+    <h3>Sign up Here Please</h3>
 
   </body>
 
   <form method="post" action="/login">
-    <label for="username">Username</label>
-    <input type="text" id="username" name="username">
-    <label for="password">Password</label>
-    <input type="text" id="password" name="password">
-    <input type="Submit" value="Log In">
+    <label for="email">Email</label>
+    <input type="text" id="user[email]" name="user[email]">
+    <label for="password_digest">Password</label>
+    <input type="text" id="user[password_digest]" name="user[password_digest]">
+    <input type="Submit" value="Sign Up">
   </form>
 </html>

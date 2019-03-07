@@ -18,8 +18,9 @@ class UserController < Sinatra::Base
   end
 
   post '/login' do
-    @user = User.find_by(:username => params[:username])
-    if @user != nil && @user.password == params[:password]
+    @new_user = User.create(email: params[:user][:email], password_digest: params[:user][:password_digest])
+    @user = User.find_by(:email => params[:user][:email])
+    if @user != nil && @user.password_digest == params[:user][:password_digest]
       session[:user_id] = @user.id
       redirect to '/account'
     end
@@ -29,10 +30,14 @@ class UserController < Sinatra::Base
   get '/account' do
     @user = User.find_by_id(session[:user_id])
     if @user
+      @user
       erb :account
     else
       erb :error
     end
+  end
+
+  post '/account/details' do
   end
 
   get '/logout' do
