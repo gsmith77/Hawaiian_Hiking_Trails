@@ -7,15 +7,25 @@
   </head>
   <body id="page-top">
     <h1>Welcome to Hawaiian Hiking Trails</h1>
-    <h3>Sign up Here Please or Log In if you are already a Member</h3>
+    <h3>Sign up Here Please</h3>
 
   </body>
 
+  <form method="post" action="/account_creation">
+    <label for="email">Email</label>
+    <input type="text" id="user[email]" name="user[email]">
+    <label for="password">Password</label>
+    <input type="text" id="user[password]" name="user[password]">
+    <input type="Submit" value="Sign Up">
+  </form>
+<br>
+<h4>Log In if you are already a Member</h4>
+<br>
   <form method="post" action="/login">
     <label for="email">Email</label>
     <input type="text" id="user[email]" name="user[email]">
-    <label for="password_digest">Password</label>
-    <input type="text" id="user[password_digest]" name="user[password_digest]">
-    <input type="Submit" value="Continue">
+    <label for="password">Password</label>
+    <input type="text" id="user[password]" name="user[password]">
+    <input type="Submit" value="Log In">
   </form>
 </html>
