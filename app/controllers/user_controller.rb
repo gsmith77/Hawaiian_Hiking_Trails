@@ -18,13 +18,16 @@ class UserController < Sinatra::Base
   end
 
   post '/account_creation' do
-    @user = User.create(email: params[:user][:email], password: params[:user][:password])
+    @user = User.create(email: params[:user][:email], password_digest: params[:user][:password_digest])
+    session[:user_id] = @user.id
     redirect '/account'
   end
 
   post '/login' do
+    binding.pry
     @user = User.find_by(:email => params[:user][:email])
-    if @user != nil && @user.password == params[:user][:password]
+    #how to turn params[:password] into password_digest so that the two match inside of User.all
+    if @user != nil && @user.password_digest == params[:user][:password_digest]
       session[:user_id] = @user.id
       redirect to '/account'
     end

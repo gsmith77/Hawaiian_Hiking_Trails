@@ -19,6 +19,11 @@
 <%end%>
   <br>
   <br>
+  <h2>Click Delete if you would like to clear this trail from your library</h2>
+  <form action="/trails/<%=@trail.id%>/delete" method="post">
+    <input id ="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" value="delete">
+  </form>
  #need to be able to delete a trail from here. Do I cross it over to the TrailController or do I have to make
  a route inside of UserController?
  #make sure no other users have that specific trail
