@@ -16,3 +16,13 @@
   <input id ="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" value="delete">
 </form>
+<br>
+<br>
+<form action="/trails/<%=@trail.id%>/edit" method="get">
+  <input type="submit" value="Update Trail">
+</form>
+<br>
+<br>
+<form action="/trails" method="get">
+  <input type="submit" value="See All Trails in Website Library">
+</form>

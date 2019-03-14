@@ -1,6 +1,5 @@
 class TrailController < ApplicationController
 
-  #create CRUD and RESTful routes
 
   get '/trails' do #index
     @trails = Trail.all
@@ -13,9 +12,14 @@ class TrailController < ApplicationController
   end
 
   post '/trails' do #create
-    current_user.trails.create(params)
+    current_user
+    if !params.values.include?("")
+      @trail = current_user.trails.create(params)
+    else
+      redirect '/account'
+    end
 
-    redirect "/account"
+    redirect "/trails/#{@trail.id}"
   end
 
   get '/trails/:id' do #show
@@ -42,9 +46,6 @@ class TrailController < ApplicationController
   delete '/trails/:id/delete' do #delete
     @trail = Trail.delete(params[:id])
     redirect '/trails'
-
-    #flash message to show the trail has been deleted and to say that it will now
-    #show all Trails on the Webstie
   end
 
 end

@@ -7,15 +7,16 @@ class UserController < ApplicationController
   end
 
   post '/account_creation' do
-    @user = User.create(email: params[:user][:email], password_digest: params[:user][:password_digest])
+    @user = User.create(email: params[:user][:email], password: params[:user][:password])
+    @user = current_user
     session[:id] = @user.id
     redirect '/account'
   end
 
   post '/login' do
     @user = User.find_by(:email => params[:user][:email])
-    #how to turn params[:password] into password_digest so that the two match inside of User.all
-    if @user != nil && @user.password_digest == params[:user][:password_digest]
+    if @user && @user.authenticate(params[:user][:password])
+      current_user = @user
       session[:id] = @user.id
       redirect to '/account'
     end
@@ -24,7 +25,6 @@ class UserController < ApplicationController
 
   get '/account' do
     @user = current_user
-    binding.pry
     if @user
       @user
       @trails = @user.trails
@@ -34,24 +34,11 @@ class UserController < ApplicationController
     end
   end
 
-  post '/account/details' do
-    current_user
-    if !params[:user][:trail].values.include?("")
-      if !@user.trails.find_by(params[:user][:trail])
-          @trail = Trail.create(name: params[:user][:trail][:name], length: params[:user][:trail][:length],
-          duration: params[:user][:trail][:duration], location: params[:user][:trail][:location],
-          difficulty: params[:user][:trail][:difficulty], user_id: @user.id)
-        @user.trails << @trail
-      end
-    end
-    @trails = @user.trails
-    erb :show
-  end
-
   #test to see if any of the fields are empty and if they are empty then just make it go to account/details to show all of the exisiting trails
 
   get '/logout' do
     session.clear
+    current_user != @user
     redirect '/'
   end
 
