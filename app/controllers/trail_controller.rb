@@ -1,34 +1,31 @@
-class TrailController < Sinatra::Base
+class TrailController < ApplicationController
 
   #create CRUD and RESTful routes
 
-  configure do
-    set :public_folder, 'public'
-    set :views, 'app/views/trails'
-  end
-
   get '/trails' do #index
     @trails = Trail.all
-    erb :index
+
+    erb :'/trails/index'
   end
 
   get '/trails/new' do #new
-    erb :new
+    erb :'/trails/new'
   end
 
   post '/trails' do #create
-    @trail = Trail.create(params)
-    redirect "/trails/#{@trail.id}"
+    current_user.trails.create(params)
+
+    redirect "/account"
   end
 
   get '/trails/:id' do #show
     @trail = Trail.find(params[:id])
-    erb :show
+    erb :'trails/show'
   end
 
   get '/trails/:id/edit' do #edit
     @trail = Trail.find_by_id(params[:id])
-    erb :edit
+    erb :'trails/edit'
   end
 
   patch '/trails/:id' do #update
@@ -45,6 +42,9 @@ class TrailController < Sinatra::Base
   delete '/trails/:id/delete' do #delete
     @trail = Trail.delete(params[:id])
     redirect '/trails'
+
+    #flash message to show the trail has been deleted and to say that it will now
+    #show all Trails on the Webstie
   end
 
 end

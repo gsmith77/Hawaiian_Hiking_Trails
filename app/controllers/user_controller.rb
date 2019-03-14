@@ -1,17 +1,6 @@
-class UserController < Sinatra::Base
+class UserController < ApplicationController
 
   #create CRUD and RESTful routes
-
-
-  configure do
-    enable :sessions
-    set :session_secret, "secret"
-  end
-
-  configure do
-    set :public_folder, 'public'
-    set :views, 'app/views'
-  end
 
   get '/' do
     erb :'/registrations/signup'
@@ -19,26 +8,26 @@ class UserController < Sinatra::Base
 
   post '/account_creation' do
     @user = User.create(email: params[:user][:email], password_digest: params[:user][:password_digest])
-    session[:user_id] = @user.id
+    session[:id] = @user.id
     redirect '/account'
   end
 
   post '/login' do
-    binding.pry
     @user = User.find_by(:email => params[:user][:email])
     #how to turn params[:password] into password_digest so that the two match inside of User.all
     if @user != nil && @user.password_digest == params[:user][:password_digest]
-      session[:user_id] = @user.id
+      session[:id] = @user.id
       redirect to '/account'
     end
     erb :error
   end
 
   get '/account' do
-    @user = User.find_by_id(session[:user_id])
-    @trails = Trail.all
+    @user = current_user
+    binding.pry
     if @user
       @user
+      @trails = @user.trails
       erb :account
     else
       erb :error
@@ -46,12 +35,14 @@ class UserController < Sinatra::Base
   end
 
   post '/account/details' do
-    @user = User.find_by(session[:user_id])
+    current_user
     if !params[:user][:trail].values.include?("")
-       @trail = Trail.create(name: params[:user][:trail][:name], length: params[:user][:trail][:length],
-      duration: params[:user][:trail][:duration], location: params[:user][:trail][:location],
-      difficulty: params[:user][:trail][:difficulty], user_id: @user.id)
-      @user.trails << @trail
+      if !@user.trails.find_by(params[:user][:trail])
+          @trail = Trail.create(name: params[:user][:trail][:name], length: params[:user][:trail][:length],
+          duration: params[:user][:trail][:duration], location: params[:user][:trail][:location],
+          difficulty: params[:user][:trail][:difficulty], user_id: @user.id)
+        @user.trails << @trail
+      end
     end
     @trails = @user.trails
     erb :show
