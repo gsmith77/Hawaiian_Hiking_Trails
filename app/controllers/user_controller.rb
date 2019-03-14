@@ -1,7 +1,5 @@
 class UserController < ApplicationController
 
-  #create CRUD and RESTful routes
-
   get '/' do
     erb :'/registrations/signup'
   end
@@ -33,8 +31,6 @@ class UserController < ApplicationController
       erb :error
     end
   end
-
-  #test to see if any of the fields are empty and if they are empty then just make it go to account/details to show all of the exisiting trails
 
   get '/logout' do
     session.clear
