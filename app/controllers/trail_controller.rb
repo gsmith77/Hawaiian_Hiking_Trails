@@ -12,14 +12,12 @@ class TrailController < ApplicationController
   end
 
   post '/trails' do #create
-    current_user
-    if !params.values.include?("")
-      @trail = current_user.trails.create(params)
+    @trail = current_user.trails.create(trail_params)
+    if @trail.valid?
+      redirect "/trails/#{@trail.id}"
     else
-      redirect '/account'
+      erb :'/trails/new'
     end
-
-    redirect "/trails/#{@trail.id}"
   end
 
   get '/trails/:id' do #show
@@ -45,6 +43,7 @@ class TrailController < ApplicationController
 
   delete '/trails/:id/delete' do #delete
     @trail = Trail.delete(params[:id])
+
     redirect '/trails'
   end
 

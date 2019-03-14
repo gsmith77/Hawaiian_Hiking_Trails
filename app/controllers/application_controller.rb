@@ -15,16 +15,19 @@ class ApplicationController < Sinatra::Base
     #This method should use the user_id from the
     #session hash to find the user in the database and return that user.
     def current_user
-      @user = User.find_by(session[:id])
-      if session[:id] == @user.id
-        @user
-      end
-      @user
+      @user = User.find_by(id: session[:id])
     end
 
     def is_logged_in?
       !!current_user
     end
+
+    def trail_params
+      params.select do |k, v|
+      ["name", "length", "duration", "location", "difficulty"].include?(k)
+      end
+    end
   end
+
 
 end

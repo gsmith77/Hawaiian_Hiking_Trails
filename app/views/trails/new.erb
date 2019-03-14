@@ -1,5 +1,19 @@
 <h1> Enter the information about your new trail down below</h1>
 
+
+<% if @trail.errors.any? %>
+  <div id="error_explanation">
+    <h2><%=@trail.errors.count%> error(s) prohibited this trail from being create & saved:</h2>
+
+    <ul>
+    <% @trail.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+<br>
+<br>
 <form action='/trails' method='post'>
   <label for='name'>Name</label>
   <input type='text' id='name' name='name'>
