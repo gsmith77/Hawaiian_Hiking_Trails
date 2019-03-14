@@ -12,8 +12,6 @@ class ApplicationController < Sinatra::Base
   end
 
   helpers do
-    #This method should use the user_id from the
-    #session hash to find the user in the database and return that user.
     def current_user
       @user = User.find_by(id: session[:id])
     end
@@ -25,6 +23,12 @@ class ApplicationController < Sinatra::Base
     def trail_params
       params.select do |k, v|
       ["name", "length", "duration", "location", "difficulty"].include?(k)
+      end
+    end
+
+    def redirect_if_not_logged_in
+      if !is_logged_in?
+        redirect '/'
       end
     end
   end

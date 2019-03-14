@@ -23,6 +23,7 @@ class UserController < ApplicationController
   end
 
   get '/account' do
+    redirect_if_not_logged_in
     @user = current_user
     if @user
       @user
@@ -39,8 +40,5 @@ class UserController < ApplicationController
     session.clear
     redirect '/'
   end
-
-
-
 
 end
