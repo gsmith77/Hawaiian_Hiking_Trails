@@ -6,7 +6,6 @@ class UserController < ApplicationController
 
   post '/account_creation' do
     @user = User.create(email: params[:user][:email], password: params[:user][:password])
-    @user = current_user
     session[:id] = @user.id
     redirect '/account'
   end

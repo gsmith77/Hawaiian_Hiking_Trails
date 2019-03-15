@@ -1,14 +1,6 @@
 <%@trails.each do |trail|%>
 <br>
-  <%=trail.name%>
-  <br>
-  <%=trail.length%>
-  <br>
-  <%=trail.duration%>
-  <br>
-  <%=trail.location%>
-  <br>
-  <%=trail.difficulty%>
+  <a href="/trails/<%=trail.id%>"> trail <%=trail.name%></a>
   <br>
 <%end%>
   <br>

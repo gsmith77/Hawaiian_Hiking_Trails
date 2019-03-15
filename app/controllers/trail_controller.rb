@@ -48,13 +48,15 @@ class TrailController < ApplicationController
   end
 
   delete '/trails/:id/delete' do #delete
-    redirect_if_not_logged_in
     @trail = Trail.find_by_id(params[:id])
+    binding.pry
+    redirect_if_not_logged_in && current_user.trails.include?(@trail)
     if @trail && @trail.user == current_user
       @trail = Trail.delete(params[:id])
       #sinatra flash
       redirect '/trails'
     end
+    redirect '/account'
   end
 
 end
