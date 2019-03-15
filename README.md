@@ -16,5 +16,5 @@ What things you need to install the software and how to install them
 git clone [this respoitory]
 cd into directory
 run  `bundle install`
-run shotgun and copy in your address into the search bank at the top of your Chrome Browser
+run shotgun and copy in your address into the search bank at the top of your Chrome Browser and enter to Start
 ```
