@@ -9,6 +9,7 @@ class TrailController < ApplicationController
 
   get '/trails/new' do #new
     redirect_if_not_logged_in
+    @trail = Trail.new
     erb :'/trails/new'
   end
 

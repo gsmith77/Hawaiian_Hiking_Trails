@@ -1,17 +1,28 @@
 <h1> Enter the information about your new trail down below</h1>
 
+<% if @trail.errors.any? %>
+  <div id="error_explanation">
+    <h2><%=@trail.errors.count %> error(s) prohibited this trail from being saved:</h2>
+
+    <ul>
+    <% @trail.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 <br>
 <br>
 <form action='/trails' method='post'>
   <label for='name'>Name</label>
-  <input type='text' id='name' name='name'>
+  <input type='text' id='name' value="<%=@trail.name%>"  name='name'>
   <label for='length'>Length</label>
-  <input type='text' id='length' name='length'>
+  <input type='text' id='length' value="<%=@trail.length%>" name='length'>
   <label for='duration'>Duration</label>
-  <input type='text' id='duration' name='duration'>
+  <input type='text' id='duration' value="<%=@trail.duration%>" name='duration'>
   <label for='location'>Location</label>
-  <input type='text' id='location' name='location'>
+  <input type='text' id='location' value="<%=@trail.location%>" name='location'>
   <label for='difficulty'>Difficulty</label>
-  <input type='text' id='difficulty' name='difficulty'>
+  <input type='text' id='difficulty' value="<%=@trail.difficulty%>" name='difficulty'>
   <input type="submit" value="submit">
 </form>
