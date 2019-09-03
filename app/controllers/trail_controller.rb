@@ -3,7 +3,7 @@ class TrailController < ApplicationController
 
   get '/trails' do #index
     @trails = Trail.all
-
+    
     erb :'/trails/index'
   end
 
