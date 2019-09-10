@@ -13,7 +13,6 @@ source 'http://rubygems.org'
   gem 'bcrypt'
   gem "tux"
   gem 'dotenv'
-  gem 'uuid'
 
 group :test do
   gem 'rspec'
